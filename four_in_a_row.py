@@ -11,6 +11,7 @@ class FourInARow:
         new_board = []
         for _ in range(7):
             new_board.append([])
+            print(new_board)
         self.board = new_board
         self.action = list(range(7))
         if chip != 'r' and chip != 'w':
@@ -25,6 +26,12 @@ class FourInARow:
         return self.curr_move
         
     #actions
+    def actions(self):
+        for c in range(7):
+            if len(self.board[c]) < 6:
+                #returns a list of legal actions
+                return c
+                
     #TODO
 
     def result(self, action):                    
@@ -89,7 +96,7 @@ class FourInARow:
                         return True, -100
         
         #check negative diagonal 
-        for c in reverse(range(7, -1+4, -1)):
+        for c in range(6, -1+4, -1): #check logic here - vachan
             for r in range(6-3):
                 if len(self.board[c]) > r and len(self.board[c-1]) > r+1 and len (self.board[c-2]) > r+2 and len(self.board[c-3]) > r+3:
                     if self.ai_player == self.board[c][r] and self.ai_player == self.board[c-1][r+1] and self.ai_player == self.board[c-2][r+2] and self.ai_player == self.board[c-3][r+3]:
@@ -100,15 +107,12 @@ class FourInARow:
                         return True, -100  
              
         #check draw
-        for c in range(0, len(self.board)):
-            for r in range(0, len(self.board)):
-                self.board[c][r] = []
-            if len(self.board[self.ai_player]) < 4 and len(self.board[self.curr_move]) < 4 :
-                print('Draw')
-                return True, 100
+        
         #TODO  
          
         return False, 0                                            
                 
     #pretty_print
+    def pretty_print(self):
+        print(self.board, end=' ')
     #TODO
