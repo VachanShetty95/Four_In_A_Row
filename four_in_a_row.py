@@ -11,9 +11,9 @@ class FourInARow:
     def __init__(self, player, chip):
         new_board = []
         for _ in range(7):
+
             new_board.append([])
         self.board = new_board
-        print(len(self.board))
         self.action = list(range(7))
         if chip != 'r' and chip != 'w':
             print('The provided value is not a valid chip (must be, r or w): ', chip)
@@ -33,7 +33,7 @@ class FourInARow:
             if len(self.board[c]) < 6:
                 #returns a list of legal actions
                 action.append(c)
-                return action
+        return action
 
     def result(self, action):                    
         dc = deepcopy(self)
@@ -46,7 +46,10 @@ class FourInARow:
         return dc
         
     #eval
-    #TODO
+    def eval(self):
+        score = self.is_terminal()[1]
+        return score
+
         
     def is_terminal(self):
         #check vertical
@@ -68,23 +71,24 @@ class FourInARow:
                         return True, -100         #MIN player wins negative utility
                     
         #check horizontal 
-        for r in range(0, len(self.board[c])):
+        for r in range(0, 6):
             count = 0
             curr_chip = None
             for c in range(0, len(self.board)):
-                if curr_chip == self.board[c][r]:
-                    count = count + 1
-                else:
-                    curr_chip = self.board[c][r]     
-                    count = 1
-                if count == 4:
-                    if self.ai_player == curr_chip:
-                        #print('Found horizontal win')
-                        return True, 100          #MAX ai wins positive utility
+                if len(self.board[c]) > r:
+                    if curr_chip == self.board[c][r]:
+                        count = count + 1
                     else:
-                        #print('Found horizontal loss')
-                        return True, -100         #MIN player wins negative utility
-                
+                        curr_chip = self.board[c][r]     
+                        count = 1
+                    if count == 4:
+                        if self.ai_player == curr_chip:
+                            #print('Found horizontal win')
+                            return True, 100          #MAX ai wins positive utility
+                        else:
+                            #print('Found horizontal loss')
+                            return True, -100         #MIN player wins negative utility
+            
         #check positive diagonal
         for c in range(7-3): 
             for r in range(6-3):    

@@ -28,10 +28,15 @@ def ask_ai(state0):
     return state1, False 
 
 def ask_player(state0):
-    gs = GameSearch(state0, depth=3)
-    move = gs.minimax_search()
-    #gs = GameSearch(state1, depth=3, time=20)
-    #move = gs.mcts()
+    move = None
+    while move not in state0.actions():
+        print(f"Valid moves: {state0.actions()}")
+        move = input('Please enter a move: ')
+        try:
+            move = int(move)
+        except ValueError:
+            print(f"Invalid move: {move}")
+            continue
     state1 = state0.result(move)
     print('--------')
     print('Player moves')
@@ -40,7 +45,7 @@ def ask_player(state0):
     stop, value = state1.is_terminal() 
     if stop == True:
         if value > 0:
-            print('Player won')                       
+            print('AI won')                       
         else:
             print('Human won')
         return state1, True
@@ -79,4 +84,7 @@ def main():
                     break               
        
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        print('Bye')
