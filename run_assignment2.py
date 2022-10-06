@@ -32,7 +32,6 @@ def ask_player(state0):
     move = gs.minimax_search()
     #gs = GameSearch(state1, depth=3, time=20)
     #move = gs.mcts()
-    move1 = input('Make your move between 0-6')
     state1 = state0.result(move)
     print('--------')
     print('Player moves')

@@ -121,8 +121,16 @@ class FourInARow:
         return False, 0                                            
                 
     #pretty_print
-    def pretty_print(self):
+    def pretty_print(self, empty: str = ".") -> None:
+        """Draws the board"""
         for r in range(6):
             for c in range(7):
                 if len(self.board[c]) > r:
-                    print(self.board[c][r], end = ' ')
+                    print(self.board[c][r], end=" ")
+                else:
+                    print(empty, end=" ")
+            print()
+        print("-------------")
+        print("0 1 2 3 4 5 6")
+        print("-------------")
+
