@@ -158,10 +158,11 @@ class FourInARow:
     # pretty_print
     def pretty_print(self):
         """Draws the board"""
-        for r in range(0, 6):
+        for r in range(6, -1, -1):
             for c in range(0, len(self.board)):
                 if len(self.board[c]) > r:
                     print(self.board[c][r], end=" ")
                 else:
                     print("-", end=" ")
             print()
+        print("0 1 2 3 4 5 6")
