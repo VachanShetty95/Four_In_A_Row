@@ -1,7 +1,5 @@
 """
 Define game and start execution of game search
-
-Author: Tony Lindgren
 """
 from four_in_a_row import FourInARow
 from game_node_and_game_search import GameSearch
