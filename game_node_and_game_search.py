@@ -1,7 +1,5 @@
 """
 Definitions for GameNode, GameSearch and MCTS
-
-Author: Tony Lindgren
 """
 from time import process_time
 import random
