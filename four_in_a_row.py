@@ -1,8 +1,4 @@
-"""
-Four in a row
 
-Author: Tony Lindgren
-"""
 from audioop import reverse
 from copy import deepcopy
 
